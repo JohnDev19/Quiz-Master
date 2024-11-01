@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Quiz Master</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><path fill='%234a69bd' d='M184.1 38.2c9.9 8.9 10.7 24 1.8 33.9l-72 80c-4.4 4.9-10.6 7.8-17.2 7.9s-12.9-2.4-17.6-7L39 113c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l22.1 22.1 55.1-61.2c8.9-9.9 24-10.7 33.9-1.8zm0 160c9.9 8.9 10.7 24 1.8 33.9l-72 80c-4.4 4.9-10.6 7.8-17.2 7.9s-12.9-2.4-17.6-7L39 273c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l22.1 22.1 55.1-61.2c8.9-9.9 24-10.7 33.9-1.8zM256 96c0-17.7 14.3-32 32-32H512c17.7 0 32 14.3 32 32s-14.3 32-32 32H288c-17.7 0-32-14.3-32-32zm0 160c0-17.7 14.3-32 32-32H512c17.7 0 32 14.3 32 32s-14.3 32-32 32H288c-17.7 0-32-14.3-32-32zM192 416c0-17.7 14.3-32 32-32H512c17.7 0 32 14.3 32 32s-14.3 32-32 32H224c-17.7 0-32-14.3-32-32zM80 464c-26.5 0-48-21.5-48-48s21.5-48 48-48s48 21.5 48 48s-21.5 48-48 48z'/></svg>">
+  <meta name="title" content="Quiz Master - Test Your Knowledge">
+  <meta name="description" content="Challenge yourself with Quiz Master! Play exciting quizzes across various categories including General Knowledge, Sports, History, Science, Movies, and more. Test your knowledge and improve your score!">
+  <meta name="keywords" content="quiz game, trivia, knowledge test, educational game, quiz app, learning game, Quiz Master, online quiz">
+  <meta name="author" content="JohnDev19">
+  <meta name="language" content="English">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#4a69bd">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yourwebsite.com/quizmasterpro">
+  <meta property="og:title" content="Quiz Master - The Ultimate Knowledge Testing Game">
+  <meta property="og:description" content="Challenge yourself with Quiz Master! Play exciting quizzes across various categories including General Knowledge, Sports, History, Science, Movies, and more.">
+  <meta property="og:image" content="https://yourwebsite.com/path-to-your-image.jpg">
+  <meta name="application-name" content="QuizMaster Pro">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="mobile-web-app-capable" content="yes">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<div class="loading-screen">
+  <div class="loading-content">
+    <i class="fas fa-brain loading-icon"></i>
+    <h1 class="loading-title">Quiz Master</h1>
+    <div class="loading-spinner"></div>
+  </div>
+</div>
+<body>
+  <div id="mute-button" class="mute-button">
+    <i class="fas fa-volume-up"></i>
+  </div>
+  <div class="container fade-in">
+    <div class="header">
+    </div>
+    <audio id="correct-sound" src="sounds/correct.mp3"></audio>
+    <audio id="incorrect-sound" src="sounds/wrong.mp3"></audio>
+    <audio id="button-click" src="sounds/click.mp3"></audio>
+    <audio id="game-over" src="sounds/gameover.mp3"></audio>
+    <audio id="perfect-sound" src="sounds/perfect.mp3"></audio>
+    <audio id="goodjob-sound" src="sounds/goodjob.mp3"></audio>
+
+    <div class="category-screen" id="category-screen">
+      <h2>Select a Category</h2>
+      <div class="category-grid">
+        <button class="category-btn" data-category="9"><i class="fas fa-globe"></i> General Knowledge</button>
+        <button class="category-btn" data-category="21"><i class="fas fa-football-ball"></i> Sports</button>
+        <button class="category-btn" data-category="23"><i class="fas fa-landmark"></i> History</button>
+        <button class="category-btn" data-category="24"><i class="fas fa-balance-scale"></i> Politics</ button>
+        <button class="category-btn" data-category="17"><i class="fas fa-atom"></i> Science</button>
+        <button class="category-btn" data-category="11"><i class="fas fa-film"></i> Movies</button>
+        <button class="category-btn" data-category="12"><i class="fas fa-music"></i> Music</button>
+        <button class="category-btn" data-category="22"><i class="fas fa-map"></i> Geography</button>
+      </div>
+    </div>
+
+    <div class="quiz-screen" id="quiz-screen" style="display: none">
+      <div class="progress-bar">
+        <div class="progress" id="progress"></div>
+      </div>
+      <div class="question-container">
+        <div class="question" id="question"></div>
+        <div class="options" id="options"></div>
+      </div>
+    </div>
+
+    <div class="result-screen" id="result-screen" style="display: none">
+      <h2 class="result-title">Quiz Completed!</h2>
+      <div class="result-stats">
+        <div class="stat-item">
+          <div class="stat-value" id="final-score"></div>
+          <div class="stat-label">
+            Score
+          </div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="final-time"></div>
+          <div class="stat-label">
+            Time
+          </div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="final-streak"></div>
+          <div class="stat-label">
+            Max Streak
+          </div>
+        </div>
+      </div>
+      <div class="result-message" id="result-message"></div>
+      <button class="category-btn" id="play-again-btn">Play Again</button>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button class="control-btn" id="hint-btn" title="Get a Hint"><i class="fas fa-lightbulb"></i></button>
+    <button class="control-btn" id="restart-btn" title="Restart Quiz"><i class="fas fa-redo"></i></button>
+  </div>
+
+  <div id="restart-popup" class="popup">
+    <div class="popup-content">
+      <h2>Restart Quiz?</h2>
+      <p>
+        Are you sure you want to restart? Your progress will be lost.
+      </p>
+      <div class="popup-buttons">
+        <button id="restart-confirm" title="Confirm Restart"><i class="fas fa-redo"></i></button>
+        <button id="restart-cancel" title="Cancel"><i class="fas fa-times"></i></button>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
